@@ -373,6 +373,9 @@ let b:current_syntax = "c"
 
 " vim: ts=8
 
+" Modification from
+" http://stackoverflow.com/questions/736701/class-function-names-highlighting-in-vim
+
 " Highlight Class and Function names
 syn match    cCustomParen    "(" contains=cParen contains=cCppParen
 syn match    cCustomFunc     "\w\+\s*(" contains=cCustomParen
