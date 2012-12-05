@@ -37,8 +37,14 @@ if has("cscope")
     " if you want the reverse search order.
     set csto=0
 
+    " find GTAGS file from current directory up until /
+    let s:GTAGS_FILE = findfile("GTAGS", ".;/")
+    if filereadable(s:GTAGS_FILE)
+        set cscopeprg=gtags-cscope
+        exe "cs add " . s:GTAGS_FILE
+        unlet s:GTAGS_FILE
     " add any cscope database in current directory
-    if filereadable("cscope.out")
+    elseif filereadable("cscope.out")
         cs add cscope.out  
     " else add the database pointed to by environment variable 
     elseif $CSCOPE_DB != ""
@@ -131,7 +137,6 @@ if has("cscope")
     nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
     nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
-
     """"""""""""" key map timeouts
     "
     " By default Vim will only wait 1 second for each keystroke in a mapping.
@@ -143,7 +148,7 @@ if has("cscope")
     " Or, you can keep timeouts, by uncommenting the timeoutlen line below,
     " with your own personal favorite value (in milliseconds):
     "
-    "set timeoutlen=4000
+    set timeoutlen=1500
     "
     " Either way, since mapping timeout settings by default also set the
     " timeouts for multicharacter 'keys codes' (like <F1>), you should also
