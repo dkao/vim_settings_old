@@ -100,11 +100,13 @@ set hlsearch
 if &diff
 "if 1
 	if ! has("gui_running")
-		"set t_Co=256
+		if $COLORTERM == 'gnome-terminal'
+			set t_Co=256
+		endif
 		set background=dark
 	endif
 	colorscheme peaksea
-	set guifont=Liberation\ Mono\ 9
+	"set guifont=Liberation\ Mono\ 9
 endif
 " taglist toggle
 nnoremap <silent> <F8> :TlistToggle<CR>
